@@ -19,64 +19,93 @@
         <div class="navbar-header">
             <!-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a> -->
             <form role="search" class="navbar-form-custom" action="search_results.html">
-                <div class="form-group">
+                <div class="form-group" style="margin-top: 9px;">
                     <input type="text" placeholder="Search weather by city" class="form-control" name="city-search" id="city-search">
                 </div>
             </form>
-            <button class="btn btn-grey" style="margin-top: 15px;" >Search</button>
+            <button id="search_by_city" class="btn btn-grey" style="margin-top: 22px; background-color: #23c6c8;" >Search</button>
+
         </div>
             <ul class="nav navbar-top-links navbar-right">
+                <li style="margin-right: 375px;" > <span class="m-r-sm text-muted welcome-message"><h4><span>
+                <!-- <button class="" onclick="getLocation()">Share</button> -->
+                <button onclick="getLocation()" class="btn btn-default" style="background-color: #23c6c8; " type="button"><i class="fa fa-map-marker" ></i>&nbsp;&nbsp;Map</button>
+                </span> Click to share your location</h4> </span></li>
                 <li>
-                    <span class="m-r-sm text-muted welcome-message"><h3>Welcome to Weather App</h3></span>
+                    <span class="m-r-sm text-muted welcome-message"><h3 style="margin-bottom: 15px;">WeatherApp</h3></span>
                 </li>
-                <li class="dropdown"></li>
+                <!-- <li class="dropdown"></li>
                 <li class="dropdown"></li>
 
 
                 <li></li>
-                <li></li>
+                <li></li> -->
             </ul>
 
         </nav>
-<p>Click the button to get your coordinates.</p>
 
-<button onclick="getLocation()">Try It</button>
+<h2 style="color: red;" id="demo"></h2>
 
-<p style="color: red;" id="demo"></p>
 
+
+
+<div id="modal-form" class="modal fade" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body">
+            <h4 style="color:red; text-align: center;">Please enter correct city name</h4>
+        </div>
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.custom.min.js"></script>
 <script>
-$(document).ready(function(){
-    var x = document.getElementById("demo");
+var x = document.getElementById("demo");
+
+function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else { 
-        x.innerHTML = "Geolocation is not supported by this browser.";
+        x.innerHTML = "Geolocation is not supported by this browser. Search weather by city";
     }
+}
 
 function showPosition(position) {
     x.innerHTML = "Latitude: " + position.coords.latitude + 
     "<br>Longitude: " + position.coords.longitude;
+
 
 }
 
 function showError(error) {
     switch(error.code) {
         case error.PERMISSION_DENIED:
-            x.innerHTML = "User denied the request for Geolocation. You can search weather by entering city of India"
+            x.innerHTML = "User denied the request for Geolocation. Search weather by city "
             break;
         case error.POSITION_UNAVAILABLE:
-            x.innerHTML = "Location information is unavailable. You can search weather by entering city of India"
+            x.innerHTML = "Location information is unavailable. Search weather by city"
             break;
         case error.TIMEOUT:
-            x.innerHTML = "The request to get user location timed out. You can search weather by entering city of India"
+            x.innerHTML = "The request to get user location timed out. Search weather by city"
             break;
         case error.UNKNOWN_ERROR:
-            x.innerHTML = "An unknown error occurred. You can search weather by entering city of India"
+            x.innerHTML = "An unknown error occurred. Search weather by city"
             break;
     }
-}  
+}
+$(document).ready(function(){
+  $("#search_by_city").on('click',function(){
+    if($("#city-search").val() != ""){
+    }
+    else{
+      $("#modal-form").modal('show');
+    }
+  })
 })
-
 </script>
 
 </body>
