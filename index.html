@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>home</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <link href="css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <!-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a> -->
+            <form role="search" class="navbar-form-custom" action="search_results.html">
+                <div class="form-group">
+                    <input type="text" placeholder="Search weather by city" class="form-control" name="city-search" id="city-search">
+                </div>
+            </form>
+            <button class="btn btn-grey" style="margin-top: 15px;" >Search</button>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message"><h3>Welcome to Weather App</h3></span>
+                </li>
+                <li class="dropdown"></li>
+                <li class="dropdown"></li>
+
+
+                <li></li>
+                <li></li>
+            </ul>
+
+        </nav>
+<p>Click the button to get your coordinates.</p>
+
+<button onclick="getLocation()">Try It</button>
+
+<p style="color: red;" id="demo"></p>
+
+<script>
+$(document).ready(function(){
+    var x = document.getElementById("demo");
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+
+}
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation. You can search weather by entering city of India"
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable. You can search weather by entering city of India"
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out. You can search weather by entering city of India"
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred. You can search weather by entering city of India"
+            break;
+    }
+}  
+})
+
+</script>
+
+</body>
+</html>
